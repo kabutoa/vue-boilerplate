@@ -1,8 +1,7 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
-
-    "incremental": true,
+    "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "module": "ESNext",
     "moduleResolution": "Bundler",
@@ -19,9 +18,9 @@
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*",
-    "env.d.ts",
     "src/**/*",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/types/*.d.ts"
   ],
   "exclude": ["src/**/__tests__/*"]
 }
