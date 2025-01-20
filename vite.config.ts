@@ -26,12 +26,22 @@ export default defineConfig(({ mode }) => {
         },
         'pinia',
       ],
+      dts: 'src/typings/auto-imports.d.ts',
+      eslintrc: {
+        enabled: true,
+      },
     })],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
+    // 服务器配置
+    server: {
+      host: true,
+      port: 8080,
+    },
+    // 预览配置
     preview: {
       port: 8888,
       host: '0.0.0.0',
@@ -42,16 +52,6 @@ export default defineConfig(({ mode }) => {
     return mergeConfig(baseConfig, {
       base: env.VITE_BASE_URL,
       plugins: [vueDevTools()],
-      server: {
-        port: 8080,
-        host: '0.0.0.0',
-        proxy: {
-          [`${env.VITE_API_PREFIX}`]: {
-            target: env.VITE_MOCK_PATH,
-            changeOrigin: true,
-          },
-        },
-      },
     } as UserConfig)
   }
 
@@ -61,8 +61,21 @@ export default defineConfig(({ mode }) => {
       open: true,
     })],
     build: {
+      target: 'esnext',
+      reportCompressedSize: false, // 启用/禁用 gzip 压缩大小报告
+
       sourcemap: false,
       cssCodeSplit: true,
+
+      // 构建优化
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true, // 生产环境去除 console
+          drop_debugger: true, // 生产环境去除 debugger
+        },
+      },
+
       rollupOptions: {
         output: {
           // 手动分包
@@ -77,14 +90,6 @@ export default defineConfig(({ mode }) => {
             }
             return 'assets/[name]-[hash][extname]'
           },
-        },
-      },
-      // 构建优化
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: true, // 生产环境去除 console
-          drop_debugger: true, // 生产环境去除 debugger
         },
       },
     },

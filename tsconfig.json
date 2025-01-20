@@ -20,7 +20,7 @@
     "playwright.config.*",
     "src/**/*",
     "src/**/*.vue",
-    "src/types/*.d.ts"
+    "src/typings/*.d.ts"
   ],
   "exclude": ["src/**/__tests__/*"]
 }

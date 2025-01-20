@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_API_PREFIX: string
   readonly VITE_MOCK_PATH: string
   readonly VITE_CDN_PATH: string
+  readonly VITE_MOCK: boolean
 }
 
 interface ImportMeta {
