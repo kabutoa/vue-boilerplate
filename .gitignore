@@ -31,3 +31,5 @@ coverage
 *.tsbuildinfo
 
 stats.html
+
+.eslintrc-auto-import.json
