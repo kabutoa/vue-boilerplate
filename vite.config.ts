@@ -10,7 +10,7 @@ import { defineConfig, loadEnv, mergeConfig, type UserConfig } from 'vite'
 import compression from 'vite-plugin-compression2'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-import { name } from './package.json'
+import { name } from './package.json' with { type: 'json' }
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
