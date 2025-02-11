@@ -1,16 +1,19 @@
-import { createPinia } from 'pinia'
 import { createApp } from 'vue'
-
 import App from './App.vue'
-import router from './router'
 
-const app = createApp(App)
+import { setupRouter } from './router'
+import { setupStore } from './store'
 
 if (import.meta.env.VITE_MOCK) {
   import('./mock')
 }
 
-app.use(createPinia())
-app.use(router)
+async function setupApp() {
+  const app = createApp(App)
 
-app.mount('#app')
+  setupStore(app)
+  await setupRouter(app)
+  app.mount('#app')
+}
+
+setupApp()
